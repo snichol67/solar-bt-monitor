@@ -200,14 +200,17 @@ This is my cheat sheet for setting up a workable version of this application.
     Now that you're logging data to prometheus, we need to set up grafana to use the this data source to display an awesome dashboard!
 
     - Go to your grafana install at http://192.168.1.XXX:3000 and log in.
+    - Set up the grafana data source coming from prometheus 
+      - From the navigation bar running down the left side of the window, select:
+        - (Configuration (gear icon) -> Data Sources
+        - Give the data source a good name (solar-monitor)
+        - Under the HTTP section, set the URL to http://192.168.1.XXX:9090
+        - Scroll to the bottom and select Save & Test
     -  From the Create menu (+ icon on left navigation panel), choose Import and import the example dashboard json file included in the grafana folder in this project
-    - Set up a data source from prometheus (Configuration (gear icon) -> Data Sources
-      - Give the data source a good name (solar-monitor)
-      - Under the HTTP section, set the URL to http://192.168.1.XXX:9090
 
 
 ## References
-
+This project borrows some of the best elements from the following projects.  It certainly wouldn't be possible without the work done on these projects.
  - [Olen/solar-monitor](https://github.com/Olen/solar-monitor)
  - [cyrils/renogy-bt1](https://github.com/cyrils/renogy-bt1)
  - [corbinbs/solarshed](https://github.com/corbinbs/solarshed)
