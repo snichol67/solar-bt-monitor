@@ -1,8 +1,8 @@
 [monitor]
 # Bluetooth Device Settings
 adapter = hci0
-device_alias = BT-TH-B00F4B03
-mac_addr = C4:64:E3:3C:4B:03
+device_alias = BT-TH-B00FXXXX
+mac_addr = C4:64:E3:3C:XX:XX
 
 #Log Level (DEBUG | INFO | WARN | ERROR)
 log_level = INFO
