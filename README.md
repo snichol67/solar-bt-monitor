@@ -18,6 +18,7 @@ This is my cheat sheet for setting up a workable version of this application.
     ```
 
 4. Install Prometheus
+    
     Check the [prometheus web site](https://prometheus.io/download/) for the latest version of their application.  The URL below may link to older versions.
     ```
     wget https://github.com/prometheus/prometheus/releases/download/v2.31.1/prometheus-2.31.1.linux-armv7.tar.gz
@@ -87,6 +88,7 @@ This is my cheat sheet for setting up a workable version of this application.
     - Verify Prometheus is running (modify the address below with the IP address of your Raspberry Pi)
         - http://192.168.1.XXX-v2:9090
 8. Install Grafana
+    
     Check the [Grafana web site](https://grafana.com/grafana/download) for the latest version of their application.  The URL below may link to older versions.
     ```
     wget https://dl.grafana.com/enterprise/release/grafana-enterprise-8.2.3.linux-armv7.tar.gz
