@@ -1,12 +1,12 @@
 [Unit]
-Description=Solar Monitor
+Description=Solar Bluetooth Monitor
 After=network.target
  
 [Service]
 Type=simple
 User=pi
-WorkingDirectory=/home/pi/renogy-bt1
-ExecStart=/home/pi/renogy-bt1/solar-monitor.py
+WorkingDirectory=/home/pi/solar-bt-monitor
+ExecStart=/home/pi/solar-bt-monitor/solar-monitor.py
 RestartSec=13
 Restart=always
  
