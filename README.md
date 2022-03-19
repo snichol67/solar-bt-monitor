@@ -1,42 +1,137 @@
-# Renogy BT-1
-Library to read Renogy RS232 compatible [BT-1](https://www.renogy.com/bt-1-bluetooth-module-new-version/) bluetooth adapter. Tested with **Rover** / **Wanderer** series charge controllers and **Raspberry Pi Zero 2 W**. It might also work with other  "SRNE like" devices like Rich Solar, PowMr, WEIZE etc.
+# Solar Bluetooth Monitor
+Library to read data from Renogy solar Charge Controllers using the [BT-1](https://www.renogy.com/bt-1-bluetooth-module-new-version/) bluetooth adapter. Personally tested with my **Rover 40A Charge Controller**. May also work with Renogy **Wanderer** series charge controllers.  My setup uses a **Raspberry Pi 3B+**. It might also work with other  "SRNE like" devices like Rich Solar, PowMr, WEIZE etc.
 
-## Example
+# Solar Shed Cheat Sheet
+This is my cheat sheet for setting up a workable version of this application.
 
-```
-pyhton3 ./example.py
-```
-Make sure to update `mac_address` and `alias` in example.py
+1. Set up an SD card to run raspberry pi(https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2)
+2. Run raspi-config
+   - Enable SSH
+   - Enable VNC
+   - Set the Host Name
+3. Run the following commands to update the system software:
+    ```
+    sudo apt-get update
+    sudo apt-get upgrade
+    ```
 
-**How to get mac address?**
+4. Install Prometheus
+    ```
+    wget https://github.com/prometheus/prometheus/releases/download/v2.31.1/prometheus-2.31.1.linux-armv7.tar.gz
+    tar xfz prometheus-2.31.1.linux-armv7.tar.gz
+    rm xfz prometheus-2.31.1.linux-armv7.tar.gz
+    mv prometheus-2.31.1.linux-armv7.tar.gz prometheus
+    ```
+5. Set up prometheus.yml file in ~/prometheus/prometheus.yml:
+    ```
+    # my global config
+    global:
+    scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+    evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+    # scrape_timeout is set to the global default (10s).
 
-Use any BLE scanner apps like [BLE Scanner](https://play.google.com/store/apps/details?id=com.macdom.ble.blescanner) and look for devices with alias `BT-TH-XXXX..`
+    # Alertmanager configuration
+    alerting:
+    alertmanagers:
+        - static_configs:
+            - targets:
+            # - alertmanager:9093
 
-**Output**
+    # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+    rule_files:
+    # - "first_rules.yml"
+    # - "second_rules.yml"
 
-```
-INFO:root:Adapter status - Powered: True
-INFO:root:Starting discovery...
-INFO:root:Devices found: 5
-INFO:root:Found bt1 device BT-TH-B00FXXXX  [XX:6F:B0:0F:XX:XX]
-INFO:root:[80:6f:b0:0f:xx:xx] Discovered, alias = BT-TH-B00FXXXX
-INFO:root:[80:6F:B0:0F:XX:XX] Connected
-INFO:root:[80:6f:b0:0f:xx:xx] Discovered, alias = BT-TH-B00FXXXX
-INFO:root:[80:6f:b0:0f:xx:xx] Discovered, alias = BT-TH-B00FXXXX
-INFO:root:[80:6F:B0:0F:XX:XX] Resolved services
-INFO:root:subscribed to notification 0000fff1-0000-1000-8000-00805f9b34fb
-INFO:root:found write characteristic 0000ffd1-0000-1000-8000-00805f9b34fb
-INFO:root:resolved services
-DEBUG:root:create_read_request 256 => [255, 3, 1, 0, 0, 30, 209, 224]
-INFO:root:characteristic_enable_notifications_succeeded
-INFO:root:characteristic_enable_notifications_succeeded
-DEBUG:root:{'battery_percentage': 100, 'battery_voltage': 14.4, 'controller_temperature': 37, 'battery_temperature': 25, 'load_voltage': 14.4, 'load_current': 1.3, 'load_power': 1, 'pv_voltage': 19.2, 'pv_current': 5.26, 'pv_power': 101, 'max_charging_power_today': 276, 'max_discharging_power_today': 6, 'charging_amp_hours_today': 59, 'discharging_amp_hours_today': 2, 'power_generation_today': 797, 'power_generation_total': 10960, 'charging_status': 'mppt'}
-INFO:root:Gracefully exit: Disconnecting device: BT-TH-B00FXXXX [80:6F:B0:0F:XX:XX]
-```
+    # A scrape configuration containing exactly one endpoint to scrape:
+    # Here it's Prometheus itself.
+    scrape_configs:
+    # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+    - job_name: "solarshed"
+
+        # metrics_path defaults to '/metrics'
+        # scheme defaults to 'http'.
+
+        static_configs:
+        - targets: ["localhost:5000"]
+
+    ```
+6. Create the prometheus.service file in /etc/systemd/system/prometheus.service
+    ```
+    [Unit]
+    Description=Prometheus Server
+    Documentation=https://prometheus.io/docs/introduction/overview/
+    After=network-online.target
+
+    [Service]
+    User=pi
+    Restart=on-failure
+
+    #Change this line if Prometheus is somewhere different
+    ExecStart=/home/pi/prometheus/prometheus \
+    --config.file=/home/pi/prometheus/prometheus.yml \
+    --storage.tsdb.path=/home/pi/prometheus/data
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+7. Setup the Prometheus Service
+    ```
+    sudo systemctl daemon-reload
+    sudo systemctl start prometheus
+    sudo systemctl status prometheus
+    sudo systemctl enable prometheus
+    ```
+    - Verify Prometheus is running
+        - http://solarshed-v2:9090
+8. Install Grafana
+    ```
+    wget https://dl.grafana.com/enterprise/release/grafana-enterprise-8.2.3.linux-armv7.tar.gz
+    tar -zxvf grafana-enterprise-8.2.3.linux-armv7.tar.gz
+    rm grafana-6.5.3.linux-armv7.tar.gz
+    mv grafana-6.5.3/ grafana/   
+    ```
+9. Create the grafana.service file in /etc/systemd/system/grafana.service
+    ```
+    [Unit]
+    Description=Grafana Server
+    After=network.target
+
+    [Service]
+    Type=simple
+    User=pi
+    ExecStart=/home/pi/grafana/bin/grafana-server
+    WorkingDirectory=/home/pi/grafana/
+    Restart=always
+    RestartSec=10
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+10. Set Up the Grafana Service
+    ```
+    sudo systemctl daemon-reload
+    sudo systemctl start grafana
+    sudo systemctl status grafana
+    sudo systemctl enable grafana
+    ```
+    1. After grafana is installed, go to http://192.168.1.132:3000
+    2. Default log in is admin/admin
+    3. From the Create menu (+ icon on left navigation panel), choose Import and import the dashboard json file
+    4. Set up a data source from prometheus (Configuration (gear icon) -> Data Sources
+       1. Our configuration should be http://192.168.1.132:9090
 
 
-**Note:** This works best with cron jobs, ex: read every 5 mins. Its not designed for coninues real-time monitoring as it reads once and exits.
-
+11. Install this project on your Raspberry Pi - https://github.com/snichol67/solar-bt-monitor.git
+    ```
+    cd ~/
+    git clone https://github.com/snichol67/solar-bt-monitor.git
+    cd solar-bt-monitor
+    cp solar-monitor.ini.dist solar-monitor.ini
+    ```
+    Now you'll need to edit the solar-monitor.ini with the specifics of your setup. You need to get the MAC address of your particular BT-1 device.  You can use a BLE scanner app like:
+      - [BLE Scanner (Apple App Store)](https://apps.apple.com/us/app/ble-scanner-4-0/id1221763603)
+      - [BLE Scanner (Google Play)](https://play.google.com/store/apps/details?id=com.macdom.ble.blescanner)
+    and look for a devices with alias `BT-TH-XXXX..`.  If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1.
 
 ## Dependencies
 
@@ -48,5 +143,6 @@ libscrc
 ## References
 
  - [Olen/solar-monitor](https://github.com/Olen/solar-monitor)
+ - [cyrils/renogy-bt1](https://github.com/cyrils/renogy-bt1)
  - [corbinbs/solarshed](https://github.com/corbinbs/solarshed)
  - [Rover 20A/40A Charge Controller—MODBUS Protocol](https://docs.google.com/document/d/1OSW3gluYNK8d_gSz4Bk89LMQ4ZrzjQY6/edit)
