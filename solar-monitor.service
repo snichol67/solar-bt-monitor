@@ -1,0 +1,15 @@
+[Unit]
+Description=Solar Monitor
+After=network.target
+ 
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/renogy-bt1
+ExecStart=/home/pi/renogy-bt1/solar-monitor.py
+RestartSec=13
+Restart=always
+ 
+[Install]
+WantedBy=multi-user.target
+

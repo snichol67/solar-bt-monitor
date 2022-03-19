@@ -1,0 +1,27 @@
+[monitor]
+# Bluetooth Device Settings
+adapter = hci0
+device_alias = BT-TH-B00F4B03
+mac_addr = C4:64:E3:3C:4B:03
+
+#Log Level (DEBUG | INFO | WARN | ERROR)
+log_level = INFO
+
+# Continuous monitoring of values, script sleeps for 
+# number of seconds specified in data_read_interval
+# then makes another read attempt
+continuous_monitor = True
+
+# Number of seconds between data read attempts
+data_read_interval = 30
+
+# Often when starting up the script will disconnect
+# immediately.  Set this parameter to true and the
+# script will try to reconnect after 10 seconds.
+# After a few attempts connection will succeed and
+# resolve services.
+reconnect = True
+
+# Data logger type. Currently supports prometheus
+data_logger = prometheus
+
