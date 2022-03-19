@@ -3,7 +3,7 @@
       "list": [
         {
           "builtIn": 1,
-          "datasource": "solarshed",
+          "datasource": "solarmonitor",
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
@@ -91,7 +91,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_battery_percentage",
+            "expr": "solarmon_battery_percentage",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -169,7 +169,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_solar_volts",
+            "expr": "solarmon_solar_volts",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -243,7 +243,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_solar_watts",
+            "expr": "solarmon_solar_watts",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -317,7 +317,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_solar_amperes",
+            "expr": "solarmon_solar_amperes",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -415,7 +415,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_controller_charging_state",
+            "expr": "solarmon_controller_charging_state",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 2,
@@ -492,7 +492,7 @@
               "uid": "1oO_piigz"
             },
             "exemplar": true,
-            "expr": "solarshed_charging_amp_hours_today",
+            "expr": "solarmon_charging_amp_hours_today",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -570,7 +570,7 @@
               "uid": "1oO_piigz"
             },
             "exemplar": true,
-            "expr": "solarshed_discharging_amp_hours_today",
+            "expr": "solarmon_discharging_amp_hours_today",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -648,7 +648,7 @@
               "uid": "1oO_piigz"
             },
             "exemplar": true,
-            "expr": "solarshed_max_charging_power_today",
+            "expr": "solarmon_max_charging_power_today",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -726,7 +726,7 @@
               "uid": "1oO_piigz"
             },
             "exemplar": true,
-            "expr": "solarshed_power_generation_today",
+            "expr": "solarmon_power_generation_today",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -804,7 +804,7 @@
               "uid": "1oO_piigz"
             },
             "exemplar": true,
-            "expr": "solarshed_power_generation_total",
+            "expr": "solarmon_power_generation_total",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -951,7 +951,7 @@
         "pluginVersion": "8.2.1",
         "targets": [
           {
-            "expr": "solarshed_battery_percentage",
+            "expr": "solarmon_battery_percentage",
             "format": "time_series",
             "hide": false,
             "intervalFactor": 2,
@@ -1049,7 +1049,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_solar_watts",
+            "expr": "solarmon_solar_watts",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 2,
@@ -1140,7 +1140,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_solar_volts",
+            "expr": "solarmon_solar_volts",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 2,
@@ -1231,7 +1231,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_solar_amperes",
+            "expr": "solarmon_solar_amperes",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 2,
@@ -1286,7 +1286,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_load_power_watts",
+            "expr": "solarmon_load_power_watts",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 2,
@@ -1406,7 +1406,7 @@
               "uid": "1oO_piigz"
             },
             "exemplar": true,
-            "expr": "solarshed_load_volts",
+            "expr": "solarmon_load_volts",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 2,
@@ -1461,7 +1461,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_load_amperes",
+            "expr": "solarmon_load_amperes",
             "format": "time_series",
             "interval": "",
             "intervalFactor": 2,
@@ -1544,7 +1544,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_battery_volts",
+            "expr": "solarmon_battery_volts",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1636,7 +1636,7 @@
               "uid": "1oO_piigz"
             },
             "exemplar": true,
-            "expr": "solarshed_battery_current",
+            "expr": "solarmon_battery_current",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1721,7 +1721,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_battery_temperature_celsius * 1.8 + 32",
+            "expr": "solarmon_battery_temperature_celsius * 1.8 + 32",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1804,7 +1804,7 @@
         "targets": [
           {
             "exemplar": true,
-            "expr": "solarshed_controller_temperature_celsius * 1.8 + 32",
+            "expr": "solarmon_controller_temperature_celsius * 1.8 + 32",
             "format": "time_series",
             "hide": false,
             "interval": "",
@@ -1964,8 +1964,8 @@
       ]
     },
     "timezone": "",
-    "title": "Solar Shed",
-    "uid": "solarshed-01",
+    "title": "Solar Bluetooth Monitor",
+    "uid": "solarmon-01",
     "version": 26,
     "weekStart": ""
   }
