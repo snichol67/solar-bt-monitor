@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus Server
+Documentation=https://prometheus.io/docs/introduction/overview/
+After=network-online.target
+
+[Service]
+User=pi
+Restart=on-failure
+
+#Change this line if Prometheus is somewhere different
+ExecStart=/home/pi/prometheus/prometheus \
+--config.file=/home/pi/prometheus/prometheus.yml \
+--storage.tsdb.path=/home/pi/prometheus/data
+
+[Install]
+WantedBy=multi-user.target
