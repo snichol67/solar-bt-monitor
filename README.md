@@ -1,5 +1,7 @@
 # Solar Bluetooth Monitor
-Library to read data from Renogy solar Charge Controllers using the [BT-1](https://www.renogy.com/bt-1-bluetooth-module-new-version/) bluetooth adapter. Personally tested with my **Rover 40A Charge Controller**. May also work with Renogy **Wanderer** series charge controllers.  My setup uses a **Raspberry Pi 3B+**. It might also work with other  "SRNE like" devices like Rich Solar, PowMr, WEIZE etc.
+Python app to read data from Renogy solar Charge Controllers using the [BT-1](https://www.renogy.com/bt-1-bluetooth-module-new-version/) bluetooth adapter. Personally tested with my **Rover 40A Charge Controller**. May also work with Renogy **Wanderer** series charge controllers.  My setup uses a **Raspberry Pi 3B+**. It might also work with other  "SRNE like" devices like Rich Solar, PowMr, WEIZE etc.
+
+This setup uses prometheus for logging data and leverages grafana to create a real-time dashboard for monitoring the performance of your system.  The cheat sheet below contains some of my notes for setting up the system and getting the logging working.
 
 # Solar Shed Cheat Sheet
 This is my cheat sheet for setting up a workable version of this application.
@@ -16,6 +18,7 @@ This is my cheat sheet for setting up a workable version of this application.
     ```
 
 4. Install Prometheus
+    Check the [prometheus web site](https://prometheus.io/download/) for the latest version of their application.  The URL below may link to older versions.
     ```
     wget https://github.com/prometheus/prometheus/releases/download/v2.31.1/prometheus-2.31.1.linux-armv7.tar.gz
     tar xfz prometheus-2.31.1.linux-armv7.tar.gz
@@ -81,9 +84,10 @@ This is my cheat sheet for setting up a workable version of this application.
     sudo systemctl status prometheus
     sudo systemctl enable prometheus
     ```
-    - Verify Prometheus is running
-        - http://solarshed-v2:9090
+    - Verify Prometheus is running (modify the address below with the IP address of your Raspberry Pi)
+        - http://192.168.1.XXX-v2:9090
 8. Install Grafana
+    Check the [Grafana web site](https://grafana.com/grafana/download) for the latest version of their application.  The URL below may link to older versions.
     ```
     wget https://dl.grafana.com/enterprise/release/grafana-enterprise-8.2.3.linux-armv7.tar.gz
     tar -zxvf grafana-enterprise-8.2.3.linux-armv7.tar.gz
