@@ -2,3 +2,4 @@ __pycache__/
 solar-monitor.ini
 example.py
 solar-monitor/
+.DS_Store
