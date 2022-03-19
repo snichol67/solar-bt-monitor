@@ -134,10 +134,25 @@ This is my cheat sheet for setting up a workable version of this application.
     cd solar-bt-monitor
     cp solar-monitor.ini.dist solar-monitor.ini
     ```
+    
+    - Install the GATT library
+        ```
+        pip install gatt
+        ```
+    - Install libscrc
+        I had to build libscrc because it's not installable with pip3
+        ```
+        git clone https://github.com/hex-in/libscrc
+        cd libscrc/
+        python3 setup.py build
+        sudo python3 setup.py install
+        ```
+    
     Now you'll need to edit the solar-monitor.ini with the specifics of your setup. You need to get the MAC address of your particular BT-1 device.  You can use a BLE scanner app like:
       - [BLE Scanner (Apple App Store)](https://apps.apple.com/us/app/ble-scanner-4-0/id1221763603)
       - [BLE Scanner (Google Play)](https://play.google.com/store/apps/details?id=com.macdom.ble.blescanner)
-    and look for a devices with alias `BT-TH-XXXX..`.  If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1.
+    
+    Look for a devices with alias `BT-TH-XXXX..`.  If the device doesn't show up in the scanner, make sure you force quit any of the Renogy apps that might be connected to your BT-1.
 
 ## Dependencies
 
