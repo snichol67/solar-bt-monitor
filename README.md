@@ -3,7 +3,7 @@ Python app to read data from Renogy solar Charge Controllers using the [BT-1](ht
 
 This setup uses prometheus for logging data and leverages grafana to create a real-time dashboard for monitoring the performance of your system.  The cheat sheet below contains some of my notes for setting up the system and getting the logging working.
 
-# Solar Shed Cheat Sheet
+# Install Cheat Sheet
 This is my cheat sheet for setting up a workable version of this application.
 
 1. Set up an SD card to run raspberry pi with the [instructions here](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2).
