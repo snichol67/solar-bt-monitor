@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=pi
 WorkingDirectory=/home/pi/solar-bt-monitor
-ExecStart=/home/pi/solar-bt-monitor/solar-monitor.py
+ExecStart=/home/pi/solar-bt-monitor/solar-bt-monitor.py
 RestartSec=13
 Restart=always
  
