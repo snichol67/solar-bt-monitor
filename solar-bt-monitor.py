@@ -6,11 +6,10 @@ import configparser
 
 # Read configuration file
 config = configparser.ConfigParser()
-config.read('solar-monitor.ini')
+config.read('solar-bt-monitor.ini')
 
 # Set logging level
 log_level = config.get('monitor', 'log_level', fallback='INFO')
-logging.debug("[CONFIG] Log level: {}".format(log_level))
 if (log_level is None or log_level == "INFO"):
     level = logging.INFO
 elif (log_level == "DEBUG"):
@@ -20,7 +19,7 @@ elif (log_level == "WARN"):
 elif (log_level == "ERROR"):
     level = logging.ERROR
 
-duallog.setup('solar-monitor', minLevel=level, fileLevel=level, rotation='daily', keep=30)
+duallog.setup('solar-bt-monitor', minLevel=level, fileLevel=level, rotation='daily', keep=30)
 
 mac_addr = config.get('monitor', 'mac_addr', fallback=None)
 logging.debug("[CONFIG] mac_addr: {}".format(mac_addr))
