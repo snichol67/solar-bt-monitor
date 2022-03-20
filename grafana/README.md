@@ -37,13 +37,13 @@ Grafana is an open source library for visualizing data.  You can run grafana on 
     - After grafana is installed, go to http://192.168.1.XXX:3000
     - Default log in is username: admin, password: admin
       - You'll be promted to create a unique password for your installation
-- After the rest of your installation is complete, you can set up your prometheus data source and import the solar-bt-monitor.json file as a dashboard into grafana
-  - Once you have running on your Pi, should be able to add it as a data source to grafana
+- After the rest of your installation is complete, you can set up your prometheus data source and import the `solar-bt-monitor.json` file as a dashboard into grafana
+  - Once you have running prometheus on your Pi, should be able to add it as a data source to grafana
     - From the left hand navigation, hover over the Configuration (gear icon) menu and choose Data Sources
     - Choose Add data soruce
     - Set the data source name
-      - The included dashboard expects a data source named **solarmonitor**, so unless you need it to be something different it might be best to stick with this
-    - Under the HTTP section, set the URL to http://192.168.1.XXX:9090
+      - The included dashboard expects a data source named `solarmonitor`, so unless you need it to be something different it might be best to stick with this
+    - Under the HTTP section, set the URL to the prometheus endpoint you set up when installing and getting prometheus running http://192.168.1.XXX:9090
     - Scroll to the bottom and select Save & Test
   - Now we can import the included dashboard `solar-bt-monitor.json`
     - From the navigation on the left, hover over the Create (+ icon) menu and choose Import
