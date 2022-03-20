@@ -1,3 +1,10 @@
+# ------------------------------------------------------
+# BTOneApp.py
+# Original Author: Cyril Sebastian
+# https://github.com/cyrils/renogy-bt1
+#
+# Modifications by: Scott Nichol
+# ------------------------------------------------------
 from threading import Timer
 import os
 import logging 

@@ -1,4 +1,22 @@
 #!/usr/bin/env python3
+
+# ------------------------------------------------------
+# Original Author: Scott Nichol
+# https://github.com/snichol67/solar-bt-monitor
+#
+# Sets up logging, reads the configuration file, and
+# attempts to connect to the bluetooth module. If 
+# continuous monitoring is set, the BTOneApp has been
+# modified to sleep for 30 seconds, then request 
+# another data read from the BT-1 device
+# 
+# If auto_reconnect is set, if the bluetooth connection
+# initially fails (and it often does), the script 
+# sleeps for 10 seconds and tries to reconnect again.
+# 
+# Feel free to reuse this code for any purpose
+# ------------------------------------------------------
+
 from BTOneApp import BTOneApp
 import logging 
 import duallog

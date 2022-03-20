@@ -1,3 +1,11 @@
+# ------------------------------------------------------
+# BTOneApp.py
+# Original Author: Cyril Sebastian
+# https://github.com/cyrils/renogy-bt1
+#
+# Modifications by: Scott Nichol
+# ------------------------------------------------------
+
 import logging
 import string                                                     
 import libscrc

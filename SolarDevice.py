@@ -1,3 +1,12 @@
+
+# ------------------------------------------------------
+# BTOneApp.py
+# Original Author: Cyril Sebastian
+# https://github.com/cyrils/renogy-bt1
+#
+# Modifications by: Scott Nichol
+# ------------------------------------------------------
+
 import gatt
 import logging 
 import time

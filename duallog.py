@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+# ------------------------------------------------------
+# duallog.py
+# Original Author: Olen
+# https://github.com/Olen/solar-monitor
+# ------------------------------------------------------
+
 """Duallog
 
 This module contains a function "setup()" that sets up dual logging. 

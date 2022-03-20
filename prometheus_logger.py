@@ -1,3 +1,18 @@
+# ------------------------------------------------------
+# Original Author: Scott Nichol
+# https://github.com/snichol67/solar-bt-monitor
+#
+# This small module sets up several prometheus gauges
+# and starts the prometheus server on port 5000.  The
+# prometheus_logger class provides a method that is 
+# used as a callback for when data is received by the
+# bluetooth modules.
+#
+# When data is received, we set a value on each of the 
+# mapped gauges, pushing them into the prometheus store.
+#
+# Feel free to reuse this code for any purpose
+# ------------------------------------------------------
 from prometheus_client import start_http_server, Gauge
 import logging 
 from gpiozero import CPUTemperature
