@@ -33,39 +33,11 @@ This is my cheat sheet for setting up a workable version of this application.
     rm xfz prometheus-2.31.1.linux-armv7.tar.gz
     mv prometheus-2.31.1.linux-armv7.tar.gz prometheus
     ```
-5. Set up prometheus.yml file in ~/prometheus/prometheus.yml:
-    ```
-    # my global config
-    global:
-    scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-    evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-    # scrape_timeout is set to the global default (10s).
+5. Copy the file in this project (`prometheus\prometheus.yml`) into the promethus install folder (`~/prometheus/prometheus.yml`), overwriting the existing file:
+   ```
+   cp ~/solar-bt-monitor/prometheus/prometheus.yml ~/prometheus/prometheus.yml
+   ```
 
-    # Alertmanager configuration
-    alerting:
-    alertmanagers:
-        - static_configs:
-            - targets:
-            # - alertmanager:9093
-
-    # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
-    rule_files:
-    # - "first_rules.yml"
-    # - "second_rules.yml"
-
-    # A scrape configuration containing exactly one endpoint to scrape:
-    # Here it's Prometheus itself.
-    scrape_configs:
-    # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-    - job_name: "solarshed"
-
-        # metrics_path defaults to '/metrics'
-        # scheme defaults to 'http'.
-
-        static_configs:
-        - targets: ["localhost:5000"]
-
-    ```
 6. Create the prometheus.service file in /etc/systemd/system/prometheus.service
     ```
     [Unit]
