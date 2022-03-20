@@ -1,5 +1,6 @@
 __pycache__/
 solar-monitor.ini
+solar-bt-monitor.ini
 example.py
 solar-monitor/
 solar-bt-monitor/
